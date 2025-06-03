@@ -1,0 +1,53 @@
+{
+  "outputDirectory": "./processed_data",
+  "maxRowsPerFile": 25000,
+  "outputFormat": "json",
+  "useMultipleProcesses": true,
+  "processCount": 4,
+  "generateStats": true,
+  "transformations": {
+    "includeColumns": [
+      "id",
+      "first_name", 
+      "last_name",
+      "email",
+      "age",
+      "country",
+      "registration_date"
+    ],
+    "typeConversions": {
+      "id": "number",
+      "age": "number",
+      "registration_date": "date",
+      "first_name": "trim",
+      "last_name": "trim",
+      "email": "lowercase",
+      "country": "uppercase"
+    },
+    "validation": {
+      "email": {
+        "required": true,
+        "pattern": "^[^@]+@[^@]+\\.[^@]+$"
+      },
+      "age": {
+        "type": "number",
+        "min": 13,
+        "max": 120
+      },
+      "first_name": {
+        "required": true,
+        "minLength": 1,
+        "maxLength": 50
+      },
+      "last_name": {
+        "required": true,
+        "minLength": 1,
+        "maxLength": 50
+      },
+      "country": {
+        "required": false,
+        "enum": ["US", "CA", "UK", "DE", "FR", "AU", "JP", "IN", "BR", "MX"]
+      }
+    }
+  }
+}
